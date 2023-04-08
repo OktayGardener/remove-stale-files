@@ -1,0 +1,23 @@
+name: Remove stale files
+
+on:
+  schedule:
+    - cron: "0 0 * * *"
+
+jobs:
+  remove-stale-files:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y python3-pip
+          pip3 install PyGithub
+
+      - name: Remove stale files
+        run: python3 remove_stale_files.py
+        env:
+          GITHUB_TOKEN: ${{ secrets.TEST_REMOVE_STALE_FILES_PIPELINE_SECRET }}
