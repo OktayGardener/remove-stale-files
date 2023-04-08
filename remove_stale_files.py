@@ -20,16 +20,15 @@ for i in range(0,5):
     test_file_content = 'This is a test file'
     if i < 2:
         test_file_last_modified = datetime.utcnow() - timedelta(days=2)
-    else:
 
 
 # Create the test file
-    repo.create_file(test_file_path, "test commit", test_file_content)
+repo.create_file(test_file_path, "test commit", test_file_content)
 
 # Set the "last_modified" property of the test file to two days ago
-    test_file = repo.get_contents(test_file_path)
-    if i < 2:
-        repo.update_file(test_file_path, "test commit", test_file_content, test_file.sha, last_modified=test_file_last_modified)
+test_file = repo.get_contents(test_file_path)
+if i < 2:
+    repo.update_file(test_file_path, "test commit", test_file_content, test_file.sha, last_modified=test_file_last_modified)
 
 # Get a list of all Markdown files in the repository
 markdown_files = [f for f in repo.get_contents("") if f.name.endswith(".md")]
