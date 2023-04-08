@@ -2,10 +2,12 @@ name: Remove stale files
 
 on:
   schedule:
-    - cron: '0 0 * * *' # Run the pipeline at midnight every day
+    - cron: '*/5 * * * *'
+  workflow_dispatch:
 
 jobs:
   remove-stale-files:
+    name: Remove stale files job
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -22,4 +24,4 @@ jobs:
         run: |
           python remove_stale_files.py
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TEST_REMOVE_STALE_FILES_PIPELINE_SECRET: ${{ secrets.TEST_REMOVE_STALE_FILES_PIPELINE_SECRET }}
