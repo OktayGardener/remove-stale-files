@@ -2,8 +2,9 @@ name: Remove stale files
 
 on:
   schedule:
-    - cron: '0 0 * * *' # Run the pipeline at midnight every day
-
+    - cron: '*/5 * * * *'
+  workflow_dispatch:
+  
 jobs:
   remove-stale-files:
     name: Remove stale files job
