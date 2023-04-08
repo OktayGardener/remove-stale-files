@@ -6,6 +6,7 @@ on:
 
 jobs:
   remove-stale-files:
+    name: Remove stale files job
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
