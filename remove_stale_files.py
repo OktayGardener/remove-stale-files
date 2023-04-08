@@ -13,12 +13,15 @@ REPO_NAME = 'remove-stale-files'
 g = Github(ACCESS_TOKEN)
 repo = g.get_user(REPO_OWNER).get_repo(REPO_NAME)
 
+test_file_last_modified = datetime.utcnow()
 # Set up a test file that hasn't been modified in two days
 for i in range(0,5):
-    test_file_path = 'test-file-' + i + '.md'
+    test_file_path = 'test-file-' + str(i) + '.md'
     test_file_content = 'This is a test file'
     if i < 2:
         test_file_last_modified = datetime.utcnow() - timedelta(days=2)
+    else:
+
 
 # Create the test file
     repo.create_file(test_file_path, "test commit", test_file_content)
