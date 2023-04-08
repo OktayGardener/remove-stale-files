@@ -24,14 +24,14 @@ for i in range(0,5):
     # Create the test file
     try:
         test_file = repo.get_contents(test_file_path)
-        repo.update_file(test_file_path, "test commit", test_file_content, test_file.sha, last_modified=test_file_last_modified)
+        repo.update_file(test_file_path, "test commit", test_file_content, test_file.sha)
     except:
         repo.create_file(test_file_path, "test commit", test_file_content)
 
     # Set the "last_modified" property of the test file to two days ago
     if i < 2:
         test_file = repo.get_contents(test_file_path)
-        repo.update_file(test_file_path, "test commit", test_file_content, test_file.sha, last_modified=test_file_last_modified)
+        repo.update_file(test_file_path, "test commit", test_file_content, test_file.sha)
 
 # Get a list of all Markdown files in the repository
 markdown_files = [f for f in repo.get_contents("") if f.name.endswith(".md")]
