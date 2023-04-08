@@ -39,3 +39,7 @@ print(markdown_files)
 for file in markdown_files:
     if file.last_modified < test_file_last_modified:
         repo.delete_file(file.path, "Removing stale file", file.sha)
+
+markdown_files = [f for f in repo.get_contents("") if f.name.endswith(".md")]
+print("markdown files: ")
+print(markdown_files)
