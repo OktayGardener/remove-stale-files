@@ -21,18 +21,21 @@ for i in range(0,5):
     if i < 2:
         test_file_last_modified = datetime.utcnow() - timedelta(days=2)
 
+    # Create the test file
+    try:
+        test_file = repo.get_contents(test_file_path)
+        repo.update_file(test_file_path, "test commit", test_file_content, test_file.sha, last_modified=test_file_last_modified)
+    except:
+        repo.create_file(test_file_path, "test commit", test_file_content)
 
-# Create the test file
-repo.create_file(test_file_path, "test commit", test_file_content)
-
-# Set the "last_modified" property of the test file to two days ago
-test_file = repo.get_contents(test_file_path)
-if i < 2:
-    repo.update_file(test_file_path, "test commit", test_file_content, test_file.sha, last_modified=test_file_last_modified)
+    # Set the "last_modified" property of the test file to two days ago
+    if i < 2:
+        test_file = repo.get_contents(test_file_path)
+        repo.update_file(test_file_path, "test commit", test_file_content, test_file.sha, last_modified=test_file_last_modified)
 
 # Get a list of all Markdown files in the repository
 markdown_files = [f for f in repo.get_contents("") if f.name.endswith(".md")]
-print("markdown files: ")
+print("markdown files before deletion: ")
 print(markdown_files)
 
 # Iterate over each file and delete it if it hasn't been modified in two days
